@@ -155,9 +155,9 @@ Invoke-LowerLayer -MainReq $_.ID -OtherParams $_.SideProperty -ErrorCallback (Ge
 ```
 The benefits of this approach are:
 
-	* The type system will help force your colleague Kevin Hamfist to use it correctly rather than slip some bodge into your codebase
-	* It's easy to wrap layer upon layer upon layer
-	* Error handling is kept separate from business-as-usual processing
-	* Other benefits that I'll think of after I click 'Publish'
+* The type system will help your colleagues to use it correctly
+* It's easy to wrap layer upon layer upon layer
+* Error handling is kept separate from business-as-usual processing
+* Other benefits that I'll think of after I click 'Publish'
 
 Happy callbacking!
