@@ -11,6 +11,8 @@ If you administer a lot of Windows clusters, you frequently need to get hostnam
 Hopefully this saves you a bit of effort. Usage:
 ```powershell
 Get-ClusterName
+Get-ClusterIpAddress
+Get-ClusterSqlInstanceName
 ```
 
 ```powershell
@@ -25,7 +27,9 @@ function Get-ClusterName {
             @{Name="DnsSuffix"; Expression={$_ | Get-ClusterParameter -Name DnsSuffix | select -ExpandProperty Value}}
     }
 }
+```
 
+```powershell
 #Get all the IP addresses used by a cluster
 function Get-ClusterIpAddress {
     Get-Cluster | Get-ClusterResource | ?{$_.ResourceType -like "IP Address"} | %{
@@ -36,8 +40,9 @@ function Get-ClusterIpAddress {
         @{Name="SubnetMask"; Expression={$_ | Get-ClusterParameter -Name SubnetMask | select -ExpandProperty Value}}
     }
 }
+```
 
-
+```powershell
 #Get all SQL cluster instance names
 function Get-ClusterSqlInstanceName {
     if (-not (Get-Command Get-ClusterName -ErrorAction SilentlyContinue)) {throw "Please also import the Get-ClusterName function from https://github.com/fsackur"}
@@ -71,3 +76,4 @@ function Get-ClusterSqlInstanceName {
     }
 }
 ```
+Code is [here](https://gist.github.com/fsackur/3ee637d76448602da8fa865bd215c859)
