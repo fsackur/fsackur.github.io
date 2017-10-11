@@ -8,7 +8,7 @@ tags: [Uncategorized]
 ---
 # Using delegates in Powershell, part 1
 
-Part 2 is [here]({% post_url 2017-10-08-using-delegates-in-powershell-part-2 %})
+Part 2 is [here]({% post_url 2017-10-11-using-delegates-in-powershell-part-2 %})
 
 I debug code and think that software engineering principles would be nice. I don't understand them but I think they are nice.
 
@@ -174,6 +174,6 @@ Now, about that code snippet not working. I wanted to show, conceptually, that y
 * You wouldn't pass an Exception and a CommandInfo in Powershell, you'd just pass the ErrorRecord. ErrorRecord already contains the Exception and the invocation details of whence it was thrown. It's a nice little wrapper class.
 * Whatever scriptblock you cast to Action will never return any output. Action returns void.
 
-There's more in [Part 2]({% post_url 2017-10-08-using-delegates-in-powershell-part-2 %}), but I won't blame you if that's enough for now.
+There's more in [Part 2]({% post_url 2017-10-11-using-delegates-in-powershell-part-2 %}), but I won't blame you if that's enough for now.
 
 Happy callbacking!
