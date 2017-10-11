@@ -6,8 +6,6 @@ author: freddiesackur
 comments: true
 tags: [Uncategorized]
 ---
-# Using delegates in Powershell, part 1
-
 Part 2 is [here]({% post_url 2017-10-11-using-delegates-in-powershell-part-2 %})
 
 I debug code and think that software engineering principles would be nice. I don't understand them but I think they are nice.

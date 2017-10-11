@@ -6,8 +6,6 @@ author: freddiesackur
 comments: true
 tags: [Uncategorized]
 ---
-# Using delegates in Powershell, part 2
-
 In [part 1]({% post_url 2017-10-08-using-delegates-in-powershell-part-1 %}), I described the problem of tangling up normal logic with error-handling logic and how this leads to complex code. I hinted at a solution involving passing a scriptblock that gets invoked on exceptions. 
 
 Here is some perfectly-functional code that follows on from part 1:
