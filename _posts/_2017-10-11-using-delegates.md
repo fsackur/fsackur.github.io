@@ -67,6 +67,53 @@ Get-Objects
 ```powershell
 
 
+function Handle-Error {
+    [CmdletBinding()]
+	[OutputType([void])]
+	param(
+		[Exception]$Exception,
+		[System.Management.Automation.CommandInfo]$Caller,
+		[hashtable]$CallerParameters,
+		[bool]$Retryable
+	)
+
+	if ($Exception.Message -match '401') {Get-AuthToken}
+
+    if ($Retryable) {
+        & $Caller @CallerParameters
+    }
+}
+
+
+function Get-AuthToken {
+    #Dummy, for demonstration purposes
+    #This would probably prompt the user
+    Write-Verbose "Prompting user for creds"
+}
+
+
+function Get-Objects {
+    param(
+        $AuthToken
+    )
+
+    begin {
+        $OutputArray = @()
+    }
+
+    process {
+        $Objects = Invoke-ApiCall -ErrorCallback {& Handle-Error} #(Get-Item Function:\Handle-Error).ScriptBlock
+
+    }
+
+    end {
+        return $Objects
+
+    }
+}
+
+Get-Objects
+
 
 
 ```
