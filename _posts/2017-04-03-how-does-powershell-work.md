@@ -25,7 +25,7 @@ Powershell.exe, when it loads, creates an instance of PowerShell (the class). Wh
 
 You can spin up your own instance of PowerShell within PowerShell...
 
-<h1 style="text-align:right;"> #...Powersheption!
+<h1 style="text-align:right;">...Powersheption!</h1>
 
 ```powershell
 PS C:\dev> $PS = [System.Management.Automation.PowerShell]::Create()
