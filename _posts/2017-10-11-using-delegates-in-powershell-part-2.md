@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Using delegates in Powershell, part 1
-date: 2017-10-08 20:12
+title: Using delegates in Powershell, part 2
+date: 2017-10-11 21:21
 author: freddiesackur
 comments: true
 tags: [Uncategorized]
