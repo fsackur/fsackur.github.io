@@ -27,3 +27,16 @@ Write a blogpost in .md, save it in the _posts folder, commit to master, and pus
 Build errors
 https://help.github.com/articles/viewing-jekyll-build-error-messages/
 Under Settings for your github.io repo, scroll down to the Github Pages segment and look at Build Errors
+
+
+
+```
+choco install ruby -y
+y
+refreshenv
+ruby -v
+sl .\fsackur.github.io\
+gem install jekyll
+jekyll -v
+bundle install
+```
