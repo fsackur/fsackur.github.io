@@ -15,11 +15,11 @@ I'm thinking about better ways to serve the library to our users. One aspect tha
 I found out about New-Module a while back. It's a way of taking invokable code, namely, a scriptblock, and promoting it into a PS module. You don't have to create a .psm1 file and run it through Import-Module. Obviously there are lots of ways to abuse that <grins>
 ```powershell
 $DefinitionString = @"
- function Write-SternLetter {
- Write-Output $(
- Read-Host "Give them a piece of your mind"
- )
- }
+function Write-SternLetter {
+	Write-Output $(
+		Read-Host "Give them a piece of your mind"
+	)
+}
 "@
 
 $SB = [scriptblock]::Create($DefinitionString)
@@ -40,7 +40,7 @@ Get-Module
 ```
 It's still dynamic, but now you can find it and remove it with Remove-Module, just as if it were defined in a .psm1.
 
-Side note: I use this in scripts in the library to import modules, as $Employer doesn't have the facility to copy .psm1 dependencies when we execute script from the library. I embed the text from the .psm1 file in a here-string instead, and can use the module as normal.
+> Side note: I use this in scripts in the library to import modules, as $Employer doesn't have the facility to copy .psm1 dependencies when we execute script from the library. I embed the text from the .psm1 file in a here-string instead, and can use the module as normal. This isn't perfect, but it does make the code work the same way as it did in dev (think: module scopes.)
 
 So if we have a dynamic module, can we dynamically update a single function in it without having to regenerate and reload the whole module?
 
@@ -104,10 +104,10 @@ To dynamically update a function in a module, then, here are all the pieces:
 
 ```powershell
 $ModuleSB = {
- function Get-AWitness {
-    "YEAH!"
- }
- Export-ModuleMember Get-AWitness
+	function Get-AWitness {
+		"YEAH!"
+	}
+	Export-ModuleMember Get-AWitness
 }
 
 $Module = New-Module -Name 'FeelIt' -ScriptBlock $ModuleSB | Import-Module -PassThru

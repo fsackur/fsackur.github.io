@@ -15,12 +15,12 @@ I'm currently working on a project that has multiple layers of wrapping. Our API
 Say you have:
 ```powershell
 process {
- foreach ($Item in $InputStream) {
- 
- # ...27 lines of logic about processing the input...
+	foreach ($Item in $InputStream) {
 
-Write-Output $Item.RelevantProperty
- }
+		# ...27 lines of logic about processing the input...
+
+		Write-Output $Item.RelevantProperty
+	}
 }
 ```
 Well, if I already have a lot of branching, the last thing I want to do is clutter it even further with exception and null handling.

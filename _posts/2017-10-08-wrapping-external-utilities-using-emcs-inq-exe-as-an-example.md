@@ -84,9 +84,9 @@ DEVICE             :VEND   :PROD         :REV  :SER NUM    :CAP(kb)  :WIN vol
 ```
 OK, that's the crucial first stage. From here on we're golden, especially since the output is very helpfully separated consistently with a colon. THANKS, EMC! Brocade, take note.
 
-In a problem like this, the next stage is always always going to be nested loops. You have tabular data, so you have to iterate over the rows and then iterate over each field.
+In a problem like this, the next stage is always always going to be nested loops. You have tabular data, so you have to iterate over the rows and then iterate over each field. If this is new to you, then I would like you to pretend briefly that you are manipulating some kind of awful CSV file.
 
-The inner loop is going to be a for loop, because we are going to index into both the array of the row we're working on, and also the header row
+The inner loop is going to be a for loop, because we are going to index into both the array of the row we're working on, and also the header row:
 ```powershell
 foreach ($Row in $Rows) {
     $HT = @{}
