@@ -2,10 +2,11 @@
 layout: default
 title: About
 ---
+Freddie Sackur: Sysad and Powershell fanatic
 
-This is where you would but a short bio, and/or a description of your site. It also serves as an example of how to set up a standalone page. For example:
+<img src="/images/Epping Forest micro-merkin-bar.jpg" class="right" />
+Freddie has been working in IT since 2009, during which time he has fixed many printers. Emerging into the industry, fingers clutched over starving belly, he fell under the wing of Matt Tomon at Green Fields, who doth giveth him many late-night phone calls. And the overtime was of legend. Eschewing the tradition of deploying Microsoft solutions by the arcane mouse prestidigitations of the time, he set about scripting deployments using the revolutionary _Pow Ur Shell_, which enabled him to take fuller advantage of the office's 1000 Mbit pipe for research into Facebook. Now he works at Rackspace, which company is pleased to tolerate his jaunts to Burning Man. Before all of this, he made bespoke furniture. (It broke.)
 
-<img src="/images/shakespeare.png" class="right" />
-**William Shakespeare** (26 April 1564 – 23 April 1616) was an English poet and playwright, widely regarded as the greatest writer in the English language and the world's pre-eminent dramatist. He is often called England's national poet and the "Bard of Avon". His extant works, including some collaborations, consist of about 38 plays, 154 sonnets, two long narrative poems, and a few other verses, the authorship of some of which is uncertain. His plays have been translated into every major living language and are performed more often than those of any other playwright.
+Freddie is allowed to write code, but not to talk about it. Sssh!
 
-Shakespeare was born and brought up in Stratford-upon-Avon. At the age of 18, he married Anne Hathaway—no, not *that* Anne Hathaway—with whom he had three children.
+Freddie is from Britain, which is a wind-lashed island in the bitter north. He was born of two parents and has no children; he is a node on a directed acyclic graph.
