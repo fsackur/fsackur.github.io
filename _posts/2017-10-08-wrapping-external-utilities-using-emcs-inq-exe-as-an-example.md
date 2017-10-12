@@ -69,6 +69,8 @@ DEVICE             :VEND   :PROD         :REV  :SER NUM    :CAP(kb)  :WIN vol
 \\.\PHYSICALDRIVE1 :EMC    :SYMMETRIX    :5876 :8802182000 :0        : S:
 \\.\PHYSICALDRIVE3 :EMC    :SYMMETRIX    :5876 :8804965000 :0        : T:
 ```
+> Quick digression; inq.exe is very easy to invoke, but some utilities make it quite difficult to call them, because they might need quotemarks or special characters. See [Scripting Guy](https://blogs.technet.microsoft.com/heyscriptingguy/2011/09/20/solve-problems-with-external-command-lines-in-powershell/) on the topic.
+
 Now I have blank lines in my input. So, at this stage, I spend a while mucking about with regex to try to match the multilines and get upset, because there are a number of regex tools in powershell and none of them work the same way. So I'll be cheap and do this:
 ```powershell
 $Text = & .\inq.exe -winvol
@@ -182,6 +184,6 @@ $Output | ft
 ```
 Finished (more or less) code:
 
-https://gist.github.com/fsackur/afb34f3f93310fea2f60393abae8da98
+(https://gist.github.com/fsackur/afb34f3f93310fea2f60393abae8da98)
 
 I hope this helps when you have to map a CLI utility into a powershell function.
