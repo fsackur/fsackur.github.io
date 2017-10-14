@@ -17,17 +17,7 @@ function Write-Stuff {
 }
 ```
 
-<div class="language-powershell highlighter-rouge"><pre class="highlight"><code>this is formatted directly in html
-with: div class="language-powershell highlighter-rouge", pre class="highlight", code
-
-function Write-Stuff {
-    Write-Output $Stuff
-}
-</code><code>Separate Code block in the same Pre
-
-</code></pre><pre class="highlight"><code>Separate Pre block in the same Div
-</code></pre></div>
-
+Blah blah blah
 
 ```powershell
 #this is formatted with md code block and powershell tag
@@ -37,6 +27,6 @@ function Write-Stuff {
 }
 ```
 
-```
+```plaintext
 Output with a class tag at the end
-```{:.codeoutput}
+```
