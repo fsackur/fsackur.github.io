@@ -5,5 +5,8 @@ description: $Blog | Out-World
 permalink: /:year/:month/:day/:title/
 paginate: 10
 
+markdown: kramdown
+highlighter: rouge
+
 gems: [jekyll-paginate]
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']

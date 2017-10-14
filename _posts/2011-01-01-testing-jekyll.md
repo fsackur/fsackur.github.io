@@ -26,4 +26,17 @@ function Write-Stuff {
 </code><code>Separate Code block in the same Pre
 
 </code></pre><pre class="highlight"><code>Separate Pre block in the same Div
-</pre></div>
+</code></pre></div>
+
+
+```powershell
+#this is formatted with md code block and powershell tag
+
+function Write-Stuff {
+    Write-Output $Stuff
+}
+```
+
+```
+Output with a class tag at the end
+```{:.codeoutput}
