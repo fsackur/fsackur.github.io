@@ -27,7 +27,7 @@ Exisiting guides mostly fall short for my scenario. You can follow steps to inst
 
 Choose a theme. Just google for 'jekyll theme site:github.com' - they will all be hosted in Github.
 
-Your blog posts are highly portable, your theme is maybe not so much. Find a Jekyll theme that you like on github, and fork it. Rename your fork to <username>.github.io, like [this](https://github.com/fsackur/fsackur.github.io). Clone it locally.
+Your blog posts are highly portable, your theme is maybe not so much. Find a Jekyll theme that you like on github, and fork it. Rename your fork to `<username`>.github.io, like [this](https://github.com/fsackur/fsackur.github.io). Clone it locally.
 
 # 2
 
@@ -56,7 +56,7 @@ tags: [Jekyll, Ruby, meta]
 ---
 ```
 
-3. Build errors?
+### Build errors?
 
 If you don't see your page appear after 5 minutes, then:
 - log into your github.io repo on Github
@@ -70,7 +70,7 @@ I exported my site from Wordpress and then used [wpxml2jekyll](https://github.co
 
 A combination of the following was enough to convert any remaining html tags into their equivalent markdown:
 - VS Code's Find-and-replace in all files
-- Regex matching for HTML tags, e.g. ```</?em>``` => ```**```
+- Regex matching for HTML tags, e.g. ```</?em>``` replace with ```**```
 - Disregard for my own leisure time
 
 Fortunately, it was a one-time task. Hopefully this won't be so bad for you.
@@ -78,17 +78,6 @@ Fortunately, it was a one-time task. Hopefully this won't be so bad for you.
 # Building your site locally
 
 One thing that isn't great is that you have to publish your posts to see them. That doesn't have to be the case if you run jekyll on a local ruby installation. Please, Windows users, do yourself a favour, and use chocolatey to install.
-
-```
-choco install ruby -y
-y
-refreshenv
-ruby -v
-sl .\fsackur.github.io\
-gem install jekyll
-jekyll -v
-bundle install
-```
 
 
 ### Install chocolatey, if you don't already have it:
@@ -166,7 +155,7 @@ Done installing documentation for bundler, bundle after 6 seconds
 
 ### ...wait for it! Add a gitiginore for the rendered site (this goes into _site and should not be published to Github. This file needs to go in the root of your repo):
 ```
-"_site`n" | Out-File '.gitignore' -Append -Encoding ascii
+"`n_site`n" | Out-File '.gitignore' -Append -Encoding ascii
 ```
 
 ### Install any gems from the theme's Gemfile:
@@ -192,6 +181,7 @@ Use `bundle info [gemname]` to see where a bundled gem is installed.
 ```
 
 ### _Now_ you can build your site:
+```
 PS C:\dev\fsackur.github.io> jekyll build
 Configuration file: C:/dev/fsackur.github.io/_config.yml
        Deprecation: The 'gems' configuration option has been renamed to 'plugins'. Please update your config file accordingly.
