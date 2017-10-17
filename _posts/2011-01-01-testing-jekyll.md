@@ -9,24 +9,12 @@ tags: [Uncategorized]
 
 Trying to format code blocks!
 
-```powershell
+
+{:.ab}
 this is formatted with md code block and powershell tag
 
-function Write-Stuff {
-    Write-Output $Stuff
-}
-```
 
-Blah blah blah
-
-```powershell
-#this is formatted with md code block and powershell tag
-
-function Write-Stuff {
-    Write-Output $Stuff
-}
-```
 {:.my-custom-class}
-```plaintext
+```
 Output with a class tag at the end
 ```
