@@ -59,7 +59,10 @@ sub { vertical-align: sub; font-size: 0.85em; }
 code {
     font: 0.85em Monaco, Courier, Monospace;
 }
-
+my-custom-class {
+	font: 0.85em Monaco, Courier, Monospace;
+	background-color: #839496
+}
 blockquote {
     margin: 22px 22px;
     padding: 0 20px;

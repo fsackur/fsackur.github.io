@@ -26,7 +26,7 @@ function Write-Stuff {
     Write-Output $Stuff
 }
 ```
-
+{:.my-custom-class}
 ```plaintext
 Output with a class tag at the end
 ```
