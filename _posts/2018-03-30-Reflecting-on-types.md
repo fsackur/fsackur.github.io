@@ -7,6 +7,9 @@ comments: true
 tags: [Uncategorized]
 ---
 
+# Errata
+_Shortly after publishing, I discovered the `-PassThru` switch of `Add-Type`. This invalidates most of the post. I will correct it later._
+
 Sometimes, we need to define classes in inline C#, like so:
 ```powershell
 Add-Type -TypeDefinition @'
