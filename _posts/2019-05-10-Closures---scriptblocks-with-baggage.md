@@ -104,7 +104,7 @@ If we were to access `$a` in the function, we'd get 12. But it is not captured i
 
 You can have a long and storied career without ever touching closures in Powershell. Closures are only really used in Powershell when doing metaprogramming, and metaprogramming is the solution to a very small subset of problems. ('Metaprogramming' is one term used for doing LISPy Javascripty stuff where you manipulate code with code.)
 
-In my next blogpost (about lazy loading), I'll show you a use case. But for now, here's a quick one. Let's say you have a filter:
+In my next blogpost (about [lazy loading](https://blog.dustyfox.uk/2019/05/11/Lazy-loading-for-API-attributes/)), I'll show you a use case. But for now, here's a quick one. Let's say you have a filter:
 
 ```powershell
 $filter = {$_.Id -eq 'a8124ec8-0e5d-461e-a8f9-3c6359d44397'}
