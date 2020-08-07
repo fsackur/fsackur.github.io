@@ -1,7 +1,7 @@
 ﻿---
 layout: post
 title: Using reflection to get round PSv2 lack of PSSerializer class
-date: 2019-03-11 16:39
+date: 2020-08-07 16:39
 author: freddiesackur
 comments: true
 tags: ['Powershell', 'Reflection']
@@ -48,7 +48,7 @@ At line:1 char:1
     + FullyQualifiedErrorId : TypeNotFound
 ```
 
-If I can access this class, then I can brew up an sort-of monkeypatch of `PSSerializer`'s `Serialize()` method. This is where reflection comes in.
+If I can access this class, then I can brew up an sort-of monkeypatch of `PSSerializer`'s `Serialize()` and `Done()` methods. This is where reflection comes in.
 
 First, we use the assembly containing the class to get the type:
 
@@ -90,7 +90,7 @@ I have `Where-Object {$_.GetParameters().Count -eq 3}` because `Serializer` has 
 > NonPublic
 >   ... etc ...
 > ```
-> As the name suggests, this is a _flag-type_ enum, which means that you can combine the values. THis is usually the case wherever you see options that have power-of-two values, like `0x400`, `0x800` etc etc. You bitwise-combine these to send the combination of options that you want - so `0x400` and `0x800` would be `0xC00`. We want the `Instance` and the `NonPublic` options. In Powershell, the long way to write this out would be:
+> As the name suggests, this is a _flag-type_ enum, which means that you can combine the values. This is usually the case wherever you see options that have power-of-two values, like `0x400`, `0x800` etc etc. You bitwise-combine these to send the combination of options that you want - so `0x400` and `0x800` would be `0xC00`. We want the `Instance` and the `NonPublic` options. In Powershell, the long way to write this out would be:
 >
 > ``` powershell
 > [System.Reflection.BindingFlags]::Instance -bor [System.Reflection.BindingFlags]::NonPublic
