@@ -66,7 +66,7 @@ IsPublic IsSerial Name           BaseType
 False    False    Serializer     System.Object
 ```
 
-This is a `RuntimeType`, just like the output form calling `GetType()` with no arguments on any object, except that it would be otherwise inaccessible (because it was declared `internal` rather than `public`).
+This is a `RuntimeType`, just like the output from calling `GetType()` with no arguments on any object, except that it would be otherwise inaccessible (because it was declared `internal` rather than `public`).
 
 Next we get a constructor (note that '.ctor' is a common abbreviation for 'constructor'):
 
@@ -101,55 +101,33 @@ I have `Where-Object {$_.GetParameters().Count -eq 3}` because `Serializer` has 
 To get back from our digression, we now have the constructor that we want and can invoke it:
 
 ``` powershell
-$Ctor.Invoke(@($Xw, $Depth, $true))
-    $Methods = $Type.GetMethods('Instance, NonPublic')
-$serializer = $Ctor.Invoke(@($Xw, $Depth, $true))
-$serializer | gm
+# Constructor params
+$Depth = 10    # like -Depth in ConvertTo-Json
+$OutputBuilder = [Text.StringBuilder]::new()
+$XmlWriter = [System.Xml.XmlWriter]::Create($OutputBuilder)
+
+$Serializer = $Ctor.Invoke(@($XmlWriter, $Depth, $true))
+```
+
+We're not done with reflection, unfortunately. To use this object, we need to call `Serialize` followed by `Done`. And those methods are also nonpublic. So we neeed to grab those:
+
+``` powershell
 $Methods = $Type.GetMethods('Instance, NonPublic')
-$SerializeMethod = $Methods | Where-Object {$_.Name -eq 'Serialize'}
-$SerializeMethod
-$SerializeMethod.Count
-$SerializeMethod
 $SerializeMethod = $Methods | Where-Object {$_.Name -eq 'Serialize' -and $_.GetParameters().Count -eq 1}
-$SerializeMethod
-$SerializeMethod.Invoke($serializer, @("Foo"))
-$DoneMethod = $Type.GetMethod('Done', 'Instance, NonPublic')
-$Type.GetMethod #('Done', 'Instance, NonPublic')
-$DoneMethod = $Type.GetMethod('Done', [System.Reflection.BindingFlags]'Instance, NonPublic')
-$DoneMethod
-$DoneMethod.Invoke($serializer)
-$DoneMethod.Invoke($serializer, 'Instance, NonPublic')
-$DoneMethod.Invoke($serializer, 'Instance, NonPublic')
-(history).CommandLine
-$sb
-$sb.ToString()
-$DoneMethod.Invoke($serializer, 'Instance, NonPublic')
-$DoneMethod
-$DoneMethod.Invoke($serializer, [System.Reflection.BindingFlags]'Instance, NonPublic', $null, @(), (Get-Culture))
+$DoneMethod = $Methods | Where-Object {$_.Name -eq 'Done'}
+```
 
-public static string Serialize(Object source, int depth)
-        {
-            # Create an xml writer
-            $sb = New-Object System.Text.StringBuilder
-            $xmlSettings = New-Object System.Xml.XmlWriterSettings
-            $xmlSettings.CloseOutput = $true
-            $xmlSettings.Encoding = [System.Text.Encoding]::Unicode
-            $xmlSettings.Indent = $true
-            $xmlSettings.OmitXmlDeclaration = $true
-            $xw = [System.Xml.XmlWriter]::Create($sb, $xmlSettings)
+Now we can Do The Thing:
 
-            # Serialize the objects
-            $SmaAssembly = [powershell].Assembly
-            $Type = $SmaAssembly.GetType("System.Management.Automation.Serializer")
-            #$Ctor = $Type.GetConstructors('Instance, NonPublic') | Where-Object {$_.GetParameters().Count -eq 3}
-            $serializer = [System.Activator]::CreateInstance($Type, @($Xw, $Depth, $true))
-            $Methods = $Type.GetMethods('Instance, NonPublic')
+``` powershell
+$DataToSerialize = "Foo"
 
-            serializer.Serialize(source);
-            serializer.Done();
-            serializer = null;
+$SerializeMethod.Invoke($Serializer, @($DataToSerialize))   # single param for .Serialize(data)
+$DoneMethod.Invoke($Serializer, @())                        # empty list of params for .Done()
 
-            // Return the output
-            return sb.ToString();
-        }
+return $OutputBuilder.ToString()
+# <?xml version="1.0" encoding="utf-16"?>
+# <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+#     <S>Foo</S>
+# </Objs>
 ```
