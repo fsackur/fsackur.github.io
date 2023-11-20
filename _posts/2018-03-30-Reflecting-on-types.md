@@ -4,7 +4,7 @@ title: Reflecting on types
 date: 2018-03-30 19:32
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, Metaprogramming]
 ---
 
 Sometimes, we need to define classes in inline C#, like so:
@@ -13,7 +13,7 @@ Sometimes, we need to define classes in inline C#, like so:
 Add-Type -TypeDefinition @'
 using System.Collections;
 
-public class MyClass 
+public class MyClass
 {
     private Int32 myInt;
         //etc

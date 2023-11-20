@@ -4,7 +4,7 @@ title: Closures - scriptblocks with baggage
 date: 2019-05-10 22:16
 author: freddiesackur
 comments: true
-tags: ['Powershell']
+tags: [Powershell, Metaprogramming]
 ---
 
 You may well expect what is going to happen here:

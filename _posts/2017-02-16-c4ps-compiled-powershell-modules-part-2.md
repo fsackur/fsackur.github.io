@@ -4,11 +4,11 @@ title: C#4PS – compiled powershell modules, part 2
 date: 2017-02-16 18:49
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, C#]
 ---
-This is the part 2 of a multi-part blog.
+This is part 2 of a multi-part blog.
 
-[Part 1](../2017-02-16-c4ps-compiled-powershell-modules-part-1) – [Part 2](../2017-02-16-c4ps-compiled-powershell-modules-part-2) – [Part 3](../2017-02-16-c4ps-compiled-powershell-modules-part-3)
+[Part 1]({% post_url 2017-02-16-c4ps-compiled-powershell-modules-part-1 %}) – Part 2 – [Part 3]({% post_url 2017-02-19-c4ps-compiled-powershell-modules-part-3 %})
 
 
 # Previously on C#4PS:
@@ -94,3 +94,5 @@ What will annoy you quickly is how stubborn Visual Studio is about waiting for y
 
 
 Next up: write code that isn't stupid!
+
+[Part 1]({% post_url 2017-02-16-c4ps-compiled-powershell-modules-part-1 %}) – Part 2 – [Part 3]({% post_url 2017-02-19-c4ps-compiled-powershell-modules-part-3 %})

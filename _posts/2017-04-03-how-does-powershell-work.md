@@ -4,7 +4,7 @@ title: How does PowerShell work?
 date: 2017-04-03 22:23
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell]
 ---
 This is a piece about the components of Powershell. There are many blogposts that explain how to achieve a particular result with some of these classes, but not many that give you an...
 
@@ -37,7 +37,7 @@ InvocationStateInfo : System.Management.Automation.PSInvocationStateInfo
 IsNested            : False
 HadErrors           : False
 Runspace            : System.Management.Automation.Runspaces.LocalRunspace
-RunspacePool        : 
+RunspacePool        :
 IsRunspaceOwner     : True
 HistoryString       :
 ```
@@ -51,8 +51,8 @@ Commands
 {}
 
 PS C:\dev> $PS.Runspace
- Id Name      ComputerName Type  State  Availability 
- -- ----      ------------ ----  -----  ------------ 
+ Id Name      ComputerName Type  State  Availability
+ -- ----      ------------ ----  -----  ------------
  2  Runspace2 localhost    Local Opened Available
 
 PS C:\dev> $PS.Streams
@@ -83,7 +83,7 @@ InvocationStateInfo : System.Management.Automation.PSInvocationStateInfo
 IsNested            : False
 HadErrors           : True
 Runspace            : System.Management.Automation.Runspaces.LocalRunspace
-RunspacePool        : 
+RunspacePool        :
 IsRunspaceOwner     : True
 HistoryString       :
 

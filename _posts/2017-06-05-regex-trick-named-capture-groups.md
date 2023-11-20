@@ -4,20 +4,20 @@ title: Regex trick - named capture groups
 date: 2017-06-05 12:16
 author: freddiesackur
 comments: true
-tags: [PowerShell, Regex]
+tags: [Powershell, Regex]
 ---
 I just wanted to share something that I find really cool. _(https://kevinmarquette.github.io/" target="_blank" rel="noopener noreferrer">Kevin Marquette replied to my comment on a forum _with this trick! </starstruck>
 
 
 # Named captures in PS
 ```powershell
-$Text = 
-'ERROR: Exception occurred in application FruitComparison. 
-12 Apples 
-16 Oranges 
-Resulted in Divide By Citrus at line 666' 
+$Text =
+'ERROR: Exception occurred in application FruitComparison.
+12 Apples
+16 Oranges
+Resulted in Divide By Citrus at line 666'
 
-$Text -match '(?<Severity>\w*).*' 
+$Text -match '(?<Severity>\w*).*'
 $Matches
 True
 
@@ -29,7 +29,7 @@ Severity                       ERROR
 Reminder, this is what the $Matches automatic variable looks like when you use a subgroup that isn’t named:
 ```powershell
 $Text -match '(\w*).*'
-$Matches 
+$Matches
 True
 
 Name                           Value
@@ -74,7 +74,7 @@ if ($Text -match $Pattern) {
 
 } else {
     throw (New-Object System.Management.Automation.ParseException ("Error parsing input"))
-} 
+}
 
 Input1        : 12 Apples
 ExceptionType : Divide By Citrus

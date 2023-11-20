@@ -4,7 +4,7 @@ title: Dynamic modules in Powershell
 date: 2017-10-07 09:01
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, Modules, Metaprogramming]
 ---
 ¡Hola chicos!
 
@@ -48,8 +48,8 @@ Let's first go on a tangent. If everything in Powershell is an object, what kind
 ```powershell
 PS C:\dev> (Get-Module Correspondence).GetType()
 
-IsPublic    IsSerial    Name            BaseType 
---------    --------    ----            -------- 
+IsPublic    IsSerial    Name            BaseType
+--------    --------    ----            --------
 True        False       PSModuleInfo    System.Object
 ```
 This is conceptually related to (although not in the same inheritance tree as) CommandInfo, which is the base class of FunctionInfo, ScriptInfo, CmdletInfo, et al. All those latter types are what you get from Get-Command; the former is what you get from Get-Module. If you explore these objects, you find interesting properties such as ScriptBlock and Definition. But next we're going to work with PSModuleInfo's Invoke() method.
@@ -83,12 +83,12 @@ Next, let's mention the Function drive. An alternative to Get-Command, if you wa
 ```powershell
 PS C:\dev> Get-ChildItem Function:\ | ft -AutoSize
 
-CommandType Name Version Source 
------------ ---- ------- ------ 
+CommandType Name Version Source
+----------- ---- ------- ------
 ...
 Function Get-FileHash 3.1.0.0 Microsoft.PowerShell.Utility
-Function Get-IseSnippet 1.0.0.0 ISE 
-Function Import-IseSnippet 1.0.0.0 ISE 
+Function Get-IseSnippet 1.0.0.0 ISE
+Function Import-IseSnippet 1.0.0.0 ISE
 Function Import-PowerShellDataFile 3.1.0.0 Microsoft.PowerShell.Utility
 ...
 ```

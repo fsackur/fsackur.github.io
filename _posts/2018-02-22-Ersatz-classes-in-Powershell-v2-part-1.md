@@ -4,8 +4,10 @@ title: Ersatz classes in Powershell v2 part 1
 date: 2018-02-22 00:55
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, Classes, Modules]
 ---
+Part 2 is [here]({% post_url 2018-03-02-Ersatz-classes-in-Powershell-v2-part-2 %})
+
 There are some types of problem that object-oriented programming is very well suited for. You don't particularly need it if you are running through a linear sequence of tasks, but when you have a problem that's characterised by different types of _thing_ and the relationships between your _things_ are important, then OOP can let you write much more concise code.
 
 Case in point: I have a project that's for use on members of an AD domain, to identify domain controllers and test connectivity to each on AD ports. If the member is itself a domain controller, then the ports to be tested must be a superset of the ports needed by a non-DC member. I also want discovery to be done through DNS.
@@ -113,7 +115,7 @@ $MinAgeToVote = 18
 $MaxAgeToDance = 32
 
 function AmICool {
-    return ($MyAge -ge $MinAgeToVote -and 
+    return ($MyAge -ge $MinAgeToVote -and
             $MyAge -lt $MaxAgeToDance)
 }
 
@@ -147,3 +149,5 @@ False
 ```
 
 'Elegant' would be a stretch for this syntax, but it's not bad if you don't have powershell 5 on your systems. It's worth diving into some more in part 2 of this blogpost.
+
+[Part 2]({% post_url 2018-03-02-Ersatz-classes-in-Powershell-v2-part-2 %})

@@ -4,7 +4,7 @@ title: Using delegates in Powershell, part 1
 date: 2017-10-08 20:12
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, Functional]
 ---
 Part 2 is [here]({% post_url 2017-10-11-using-delegates-in-powershell-part-2 %})
 
@@ -175,3 +175,5 @@ Now, about that code snippet not working. I wanted to show, conceptually, that y
 There's more in [Part 2]({% post_url 2017-10-11-using-delegates-in-powershell-part-2 %}), but I won't blame you if that's enough for now.
 
 Happy callbacking!
+
+[Part 2]({% post_url 2017-10-11-using-delegates-in-powershell-part-2 %})

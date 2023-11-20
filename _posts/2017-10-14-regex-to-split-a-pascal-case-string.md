@@ -4,7 +4,7 @@ title: Regex to split a Pascal-case string
 date: 2017-10-14 02:51
 author: mikera
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, Regex]
 ---
 Postcard from the bowels of the regex beast!
 
@@ -31,10 +31,10 @@ I don't want to text-edit them all myself, we have computers for that.
 Step 1, split them:
 ```powershell
 [System.Enum]::GetValues(
-    [System.Management.Automation.ErrorCategory]) | 
+    [System.Management.Automation.ErrorCategory]) |
     select -First 1 | foreach {
         [regex]::Matches(
-            $_, 
+            $_,
             '[A-Z][a-z]*'
         ).Value
     }
@@ -44,15 +44,15 @@ Not
 Specified
 ```
 
-Does anyone else select only the first item while work is in progress? Saves some scrolling. On which note, sorry about the awkward spacing, this blog theme makes horizontal space very precious. 
+Does anyone else select only the first item while work is in progress? Saves some scrolling. On which note, sorry about the awkward spacing, this blog theme makes horizontal space very precious.
 
 Complete snippet:
 ```powershell
 [System.Enum]::GetValues(
-    [System.Management.Automation.ErrorCategory]) | 
+    [System.Management.Automation.ErrorCategory]) |
     foreach {
         $Words = [regex]::Matches(
-            $_, 
+            $_,
             '[A-Z][a-z]*'
         ).Value
 

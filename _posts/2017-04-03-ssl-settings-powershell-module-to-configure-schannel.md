@@ -4,7 +4,7 @@ title: SSL settings - powershell module to configure SCHANNEL
 date: 2017-04-03 20:37
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, SChannel, SSL, 'System Tools']
 ---
 It's been a lovely spring day in London. Fortunately, I don't have to go out, because I have a window.
 

@@ -4,11 +4,11 @@ title: C#4PS – compiled powershell modules, part 3
 date: 2017-02-19 21:50
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, C#]
 ---
-This is the part 3 of a multi-part blog.
+This is part 3 of a multi-part blog.
 
-[Part 1](../2017-02-16-c4ps-compiled-powershell-modules-part-1) – [Part 2](../2017-02-16-c4ps-compiled-powershell-modules-part-2) – [Part 3](../2017-02-16-c4ps-compiled-powershell-modules-part-3)
+[Part 1]({% post_url 2017-02-16-c4ps-compiled-powershell-modules-part-1 %}) – [Part 2]({% post_url 2017-02-16-c4ps-compiled-powershell-modules-part-2 %}) – Part 3
 
 
 # Previously on C#4PS:
@@ -28,10 +28,4 @@ You may be familiar with Runspaces, which are an important part of the PowerShel
 
 <img src="https://i.makeagif.com/media/2-19-2017/DzekWM.gif">
 
- 
-
- 
-
- 
-
- 
+[Part 1]({% post_url 2017-02-16-c4ps-compiled-powershell-modules-part-1 %}) – [Part 2]({% post_url 2017-02-16-c4ps-compiled-powershell-modules-part-2 %}) – Part 3

@@ -4,7 +4,7 @@ title: Principles for exception-handling design
 date: 2017-10-14 02:51
 author: mikera
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, Design]
 ---
 I came across the answer by [mikera](https://softwareengineering.stackexchange.com/users/6909/mikera) to [this question](https://softwareengineering.stackexchange.com/questions/109297/recommend-a-design-pattern-approach-to-exposing-tolerating-recovering-from-syste) on stackexchange, and thought it worth recycling (the rest of this post is her/his words):
 

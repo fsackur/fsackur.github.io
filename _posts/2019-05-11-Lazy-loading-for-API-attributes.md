@@ -4,7 +4,7 @@ title: Lazy loading for API attributes
 date: 2019-05-11 12:49
 author: freddiesackur
 comments: true
-tags: ['Powershell']
+tags: [Powershell, Metaprogramming]
 ---
 
 Typically, when you implement an API client module, you'll query the API and output the objects you get back - possibly with some changes, possibly just as they come from the API.

@@ -4,7 +4,7 @@ title: Unit-testing PS help
 date: 2017-04-07 23:29
 author: freddiesackur
 comments: true
-tags: [help, Pester, PowerShell, unit test]
+tags: [help, Pester, Powershell, 'unit test']
 ---
 It's really useful to have someone to keep you honest if you don't write help for your PS functions as you go. I find it hard to update help continually, so a red test makes sure I don't check in code with no help.
 
@@ -16,7 +16,7 @@ It's really useful to have someone to keep you honest if you don't write help fo
 Describe 'Function help' {
 
     $ExportedCommands = (
-                            Get-Module $ModuleName | 
+                            Get-Module $ModuleName |
                             select -ExpandProperty ExportedCommands
                         ).Keys
 
@@ -24,8 +24,8 @@ Describe 'Function help' {
         It 'Provides examples for every exported function' {
             foreach ($Command in $ExportedCommands)
             {
-                (Get-Help $Command -Examples | 
-                Out-String) | 
+                (Get-Help $Command -Examples |
+                Out-String) |
                 Should Match '-------------------------- EXAMPLE 1 --------------------------'
             }
         }
@@ -44,16 +44,16 @@ Import-Module "$PSScriptRoot\$ModuleName.psm1" -Force
 
 Describe 'Function help' {
     Context 'Correctly-formatted help' {
-    
+
         foreach (
             $Command in (
-                Get-Module $ModuleName | 
+                Get-Module $ModuleName |
                 select -ExpandProperty ExportedCommands
                 ).Keys
-            ) 
+            )
             {
                 $Help = Get-Help $Command
-                
+
                 It "$Command has one or more help examples" {
                     $Help.examples.example | Should Not Be $null
                 }
@@ -63,7 +63,7 @@ Describe 'Function help' {
 
                 It "$Command examples are syntactically correct" {
                     foreach ($Example in $Help.examples.example) {
-                        [Scriptblock]::Create($Example.code) | 
+                        [Scriptblock]::Create($Example.code) |
                             Should Not Throw
                     }
                 }
@@ -73,12 +73,12 @@ Describe 'Function help' {
 ```
 Get-Help returns an object that parses the code example out of the rest of the example text. Unfortunately, it only recognises a single line of code. The following will not properly test the code, because the .code property will be only the $MyVar line:
 ```powershell
-<# 
-    .Example 
+<#
+    .Example
     PS C:\> $MyVar = 'Djibouti', 'Fiji'
-    
+
     PS C:\> Get-CapitalCity -Country $MyVar
-    
+
     Gets the capital city
 #>
 ```
@@ -94,13 +94,13 @@ If we run the tests on a module like this:
 **#FunkyModule.psm1**
 
 function Funk {
-    <# 
-        .Example 
+    <#
+        .Example
         PS C:\> Funk -Disco
-        
+
         .Example
         PS C:\> Funk -On 1, 2, 3, 4
-        
+
         some helpful text
      #>
      [CmdletBinding()]
@@ -108,7 +108,7 @@ function Funk {
          [switch]$Disco,
          [int[]]$On
      )
-     
+
      Write-Host "Lorem ipsum"
 }
 ```
@@ -117,7 +117,7 @@ The object form the Get-Help pulls out the example commands from the function h
 PS C:\> foreach ($Example in $Help.examples.example) {
            [Scriptblock]::Create($Example.code)
 }
-Funk -Disco 
+Funk -Disco
 Funk -On 1, 2, 3, 4
 ```
 This matches the param block:

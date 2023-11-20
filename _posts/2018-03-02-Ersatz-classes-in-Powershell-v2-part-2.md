@@ -4,10 +4,10 @@ title: Ersatz classes in Powershell v2 part 2
 date: 2018-03-02 09:10
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, Classes, Modules]
 ---
 
-In part 1, I outlined how you can use `Import-Module`'s -AsCustomObject to create an hacky class definition in versions of Powershell that don't support native classes (i.e., before v5).
+In [part 1]({% post_url 2018-02-22-Ersatz-classes-in-Powershell-v2-part-1 %}), I outlined how you can use `Import-Module`'s `-AsCustomObject` to create an hacky class definition in versions of Powershell that don't support native classes (i.e., before v5).
 
 Should you do this? Proooobably not - it is a bit odd to read to anyone who is familiar with OOP, and also to anyone who is familiar with Powershell. But it does give you an ability that you may not have otherwise, and it does sidestep the serious problems with native classes in Powershell (issues reloading, issues epxorting defined types, issues with testability).
 

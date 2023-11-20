@@ -4,7 +4,7 @@ title: Design Patterns presentation
 date: 2019-04-25 22:21
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Design]
 ---
 
 I gave a talk at the PSUG-UK group on April 10th.

@@ -4,11 +4,11 @@ title: C#4PS - compiled powershell modules, part 1
 date: 2017-02-16 18:44
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, C#]
 ---
-This is the part 1 of a multi-part blog.
+This is part 1 of a multi-part blog.
 
-[Part 1](../2017-02-16-c4ps-compiled-powershell-modules-part-1) – [Part 2](../2017-02-16-c4ps-compiled-powershell-modules-part-2) – [Part 3](../2017-02-16-c4ps-compiled-powershell-modules-part-3)
+Part 1 – [Part 2]({% post_url 2017-02-16-c4ps-compiled-powershell-modules-part-2 %}) – [Part 3]({% post_url 2017-02-19-c4ps-compiled-powershell-modules-part-3 %})
 
 
 # Intrrrrooooo!
@@ -122,3 +122,5 @@ If you rename it this way, Visual Studio will offer to rename it in code as well
 <img class="alignnone size-full wp-image-994" src="https://freddiesackur.files.wordpress.com/2017/02/capture13.png" alt="capture" width="775" height="315" />
 
 Boring bit over, we are ready to write and compile some code!
+
+Part 1 – [Part 2]({% post_url 2017-02-16-c4ps-compiled-powershell-modules-part-2 %}) – [Part 3]({% post_url 2017-02-19-c4ps-compiled-powershell-modules-part-3 %})

@@ -4,7 +4,7 @@ title: Powershell snippets - Get names and IPs in a failover cluster
 date: 2017-02-19 00:04
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, Cluster, 'System tools']
 ---
 If you administer a lot of Windows clusters, you frequently need to get hostnames, IPs and SQL instance names on a regular basis but! the FailoverClusters powershell module declines to give that to you without a fight.
 

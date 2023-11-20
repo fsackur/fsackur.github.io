@@ -4,7 +4,7 @@ title: Wrapping external utilities, using EMC's inq.exe as an example
 date: 2017-10-08 23:41
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, 'System tools']
 ---
 To fetch WWNs for an iSCSI LUN, you might find yourself using inq.exe, which is provided by EMC.
 
@@ -15,8 +15,8 @@ First, an intermediate (but functional) stage:
 $Output = @()
 
 $Lines = & .\inq.exe -winvol
-$Lines = $Lines | 
-    select -Skip 6 | 
+$Lines = $Lines |
+    select -Skip 6 |
     where {$_ -notmatch '^-*$'}
 
 $HeaderRow = $Lines[0]; $Rows = $Lines[1..($Lines.Count)]
@@ -164,8 +164,8 @@ After refactor:
 $Output = @()
 
 $Lines = & .\inq.exe -winvol
-$Lines = $Lines | 
-    select -Skip 6 | 
+$Lines = $Lines |
+    select -Skip 6 |
     where {$_ -notmatch '^-*$'}
 $HeaderRow = $Lines[0]; $Rows = $Lines[1..($Lines.Count)]
 $ColumnHeaders = $HeaderRow -split ':'

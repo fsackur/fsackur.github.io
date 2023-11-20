@@ -4,7 +4,7 @@ title: PowerShell snippet - find the top CPU consumer
 date: 2016-07-26 09:19
 author: freddiesackur
 comments: true
-tags: [Uncategorized]
+tags: [Powershell, CPU, 'System tools']
 ---
 A snippet to provide text output on the process using the highest CPU.
 
@@ -32,31 +32,31 @@ function Get-CpuTopOffender {
     $ProcessList1 = Get-Process | select ProcessName, Id, @{name='ms'; expr={$_.TotalProcessorTime.TotalMilliSeconds}} |            Group-Object -Property ID -AsString -AsHashTable
     $Seconds = 5
     Start-Sleep -Seconds $Seconds
-    $ProcessList2 = Get-Process | select ProcessName, Id, @{name='ms'; expr={$_.TotalProcessorTime.TotalMilliSeconds}} | 
+    $ProcessList2 = Get-Process | select ProcessName, Id, @{name='ms'; expr={$_.TotalProcessorTime.TotalMilliSeconds}} |
         Group-Object -Property ID -AsString -AsHashTable
- 
+
     $CalculatedProcessList = @()
- 
+
     foreach ($ProcessId in $ProcessList1.Keys) {
         $Name = ($ProcessList1.$ProcessID)[0].ProcessName
- 
+
         $CpuTotalMs1 = ($ProcessList1.$ProcessID)[0].ms
         if (-not ($ProcessList2.$ProcessID)) {continue}
         $CpuTotalMs2 = ($ProcessList2.$ProcessID)[0].ms
- 
+
         $Calc = New-Object psobject -Property @{
             Name = $Name;
             PID = $ProcessID;
             CPU = $($CpuTotalMs2 - $CpuTotalMs1)
         }
- 
+
         $CalculatedProcessList += $Calc
     }
- 
+
     $TopOffender = $CalculatedProcessList | sort CPU -Descending | select -First 1
- 
+
     $Output = "Top CPU hog in last $Seconds seconds: $($TopOffender.Name) with PID $($TopOffender.PID)"
- 
+
     #Add extra info
     if ($TopOffender.Name -like "svchost") {
         $ServiceNames = (Get-WmiObject -Query "SELECT Name FROM Win32_Service WHERE ProcessId = $($TopOffender.PID)" | %{$_.Name})
