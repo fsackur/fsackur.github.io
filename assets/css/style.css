@@ -47,7 +47,8 @@ a:hover {
   color: #000000;
 }
 
-p, pre { margin-bottom: 15px; }
+p { margin-bottom: 15px; }
+pre { margin-bottom: 6px; }
 ul, ol { padding: 0 0 18px 30px; }
 ol li, ul li { margin-top: 6px; margin-bottom: 6px; }
 em, i { font-style: italic; }
@@ -57,12 +58,32 @@ sup { vertical-align: super; font-size: 0.85em; }
 sub { vertical-align: sub; font-size: 0.85em; }
 
 code {
-  font: 0.85em Monaco, Courier, Monospace;
+  font: 1em MartianMono, Consolas, "Liberation Mono", Menlo, Monospace;
 }
+
 my-custom-class {
-  font: 0.85em Monaco, Courier, Monospace;
+  font: 1em MartianMono, Consolas, "Liberation Mono", Menlo, Monospace;
   background-color: #839496
 }
+
+pre.highlight {
+  background-color: #073642;
+  color: #93a1a1;
+  border: none;
+  overflow: auto;
+  padding: 6px 6px 10px 6px;
+}
+
+div.highlight {
+  padding: 3px 10px 0px 10px;
+  margin-bottom: 15px;
+  /* #content is 500px */
+  margin-left: -20px;
+  min-width: 540px;
+  max-width: 640px;
+  width: fit-content;
+}
+
 blockquote {
   margin: 22px 22px;
   padding: 0 20px;
@@ -259,6 +280,13 @@ img.center {
        url('../fonts/solarthemeicons.woff') format('woff'),
        url('../fonts/solarthemeicons.ttf') format('truetype'),
        url('../fonts/solarthemeicons.svg#solarthemeicons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MartianMono';
+  src: url("../fonts/MartianMono-StdLt.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
 }
