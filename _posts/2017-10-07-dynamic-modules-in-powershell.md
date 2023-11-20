@@ -16,9 +16,9 @@ I found out about New-Module a while back. It's a way of taking invokable code, 
 ```powershell
 $DefinitionString = @"
 function Write-SternLetter {
-	Write-Output $(
-		Read-Host "Give them a piece of your mind"
-	)
+    Write-Output $(
+        Read-Host "Give them a piece of your mind"
+    )
 }
 "@
 
@@ -96,18 +96,18 @@ However, you'll see that I enumerated these functions with Get-ChildItem. Becaus
 
 To dynamically update a function in a module, then, here are all the pieces:
 
-	* Import the module
-	* Get the module into a variable
-	* Define the updated version of the function
-	* Get the updated version into a variable
-	* Executing in the scope of the module, redefine the function
+    * Import the module
+    * Get the module into a variable
+    * Define the updated version of the function
+    * Get the updated version into a variable
+    * Executing in the scope of the module, redefine the function
 
 ```powershell
 $ModuleSB = {
-	function Get-AWitness {
-		"YEAH!"
-	}
-	Export-ModuleMember Get-AWitness
+    function Get-AWitness {
+        "YEAH!"
+    }
+    Export-ModuleMember Get-AWitness
 }
 
 $Module = New-Module -Name 'FeelIt' -ScriptBlock $ModuleSB | Import-Module -PassThru

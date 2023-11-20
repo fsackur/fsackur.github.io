@@ -17,12 +17,12 @@ I'm currently working on a project that has multiple layers of wrapping. Our API
 Say you have:
 ```powershell
 process {
-	foreach ($Item in $InputStream) {
+    foreach ($Item in $InputStream) {
 
-		# ...27 lines of logic about processing the input...
+        # ...27 lines of logic about processing the input...
 
-		Write-Output $Item.RelevantProperty
-	}
+        Write-Output $Item.RelevantProperty
+    }
 }
 ```
 Well, if I already have a lot of branching, the last thing I want to do is clutter it even further with exception and null handling.
@@ -35,9 +35,9 @@ In Powershell terms, think of a delegate as passing a scriptblock that has a str
 ```powershell
 #In the function that gets called:
 param(
-	[string]$MainParam,
-	[string]$OtherParams,
-	[System.Delegate]$ErrorCallback
+    [string]$MainParam,
+    [string]$OtherParams,
+    [System.Delegate]$ErrorCallback
 )
 
 #Could also use try/catch
@@ -48,8 +48,8 @@ trap [System.Web.HttpException] {$ErrorCallback.Invoke($_.Exception)}
 
 #In the calling function:
 $Scriptblock = {
-	param([Exception]$Exception)
-	if ($Exception.Message -match '401') {Get-Credential}
+    param([Exception]$Exception)
+    if ($Exception.Message -match '401') {Get-Credential}
 }
 
 Invoke-LowerLayer -MainParam $blah -OtherParams $blahblah -ErrorCallback $Scriptblock
@@ -60,27 +60,27 @@ Now, you don't actually pass a System.Delegate. You'll pass a System.Action. We
 ```powershell
 #On the function you call:
 param(
-	[string]$MainParam,
-	[string]$OtherParams,
-	[Action[Exception]]$ErrorCallback
+    [string]$MainParam,
+    [string]$OtherParams,
+    [Action[Exception]]$ErrorCallback
 )
 
 #In the calling function:
 $Scriptblock = {
-	param(
-		[Exception]$Exception
-	)
-	switch -Regex ($Exception.Message) {
-		'401|Token' {
-			Update-StoredCredential
-		}
-		'403' {
-			Write-PopupMessage "ACCESS DENIED"
-		}
-		default {
-			Write-PopupMessage $_
-		}
-	}
+    param(
+        [Exception]$Exception
+    )
+    switch -Regex ($Exception.Message) {
+        '401|Token' {
+            Update-StoredCredential
+        }
+        '403' {
+            Write-PopupMessage "ACCESS DENIED"
+        }
+        default {
+            Write-PopupMessage $_
+        }
+    }
 }
 
 Invoke-LowerLayer -MainParam $blah -OtherParams $blahblah -ErrorCallback $Scriptblock
@@ -90,9 +90,9 @@ Which we can refine further:
 ```powershell
 #On the function you call:
 param(
-	[string]$MainParam,
-	[string]$OtherParams,
-	[Action[Exception, System.Management.Automation.CommandInfo, hashtable, bool]]$ErrorCallback
+    [string]$MainParam,
+    [string]$OtherParams,
+    [Action[Exception, System.Management.Automation.CommandInfo, hashtable, bool]]$ErrorCallback
 )
 
 #In our try/catch or trap:
@@ -102,28 +102,28 @@ param(
 
 #In the calling function:
 $Scriptblock = {
-	[CmdletBinding()]
-	[OutputType([void])]
-	param(
-		[Exception]$Exception,
-		[System.Management.Automation.CommandInfo]$Caller,
-		[hashtable]$CallerParameters,
-		[bool]$Retryable
-	)
-	switch -Regex ($Exception.Message) {
-		'401|Token' {
-			Update-StoredCredential
-		}
-		'403' {
-			Write-PopupMessage "ACCESS DENIED"
-		}
-		default {
-			if ($Retryable) {
-				Start-Sleep 5;
-				& $Caller @CallerParameters
-			}
-		}
-	}
+    [CmdletBinding()]
+    [OutputType([void])]
+    param(
+        [Exception]$Exception,
+        [System.Management.Automation.CommandInfo]$Caller,
+        [hashtable]$CallerParameters,
+        [bool]$Retryable
+    )
+    switch -Regex ($Exception.Message) {
+        '401|Token' {
+            Update-StoredCredential
+        }
+        '403' {
+            Write-PopupMessage "ACCESS DENIED"
+        }
+        default {
+            if ($Retryable) {
+                Start-Sleep 5;
+                & $Caller @CallerParameters
+            }
+        }
+    }
 }
 ```
 By passing the extra parameters, we can retry the original call.
@@ -133,28 +133,28 @@ Note that I'm casting $PSBoundParameters to hashtable because that object doesn'
 Finally, can we send in a function definition? _Is cheese tasty..?_
 ```powershell
 function Handle-Error {
-	[CmdletBinding()]
-	[OutputType([void])]
-	param(
-		[Exception]$Exception,
-		[System.Management.Automation.CommandInfo]$Caller,
-		[hashtable]$CallerParameters,
-		[bool]$Retryable
-	)
-	switch -Regex ($Exception.Message) {
-		'401|Token' {
-			Update-StoredCredential
-		}
-		'403' {
-			Write-PopupMessage "ACCESS DENIED"
-		}
-		default {
-			if ($Retryable) {
-				Start-Sleep 5;
-				& $Caller @CallerParameters
-			}
-		}
-	}
+    [CmdletBinding()]
+    [OutputType([void])]
+    param(
+        [Exception]$Exception,
+        [System.Management.Automation.CommandInfo]$Caller,
+        [hashtable]$CallerParameters,
+        [bool]$Retryable
+    )
+    switch -Regex ($Exception.Message) {
+        '401|Token' {
+            Update-StoredCredential
+        }
+        '403' {
+            Write-PopupMessage "ACCESS DENIED"
+        }
+        default {
+            if ($Retryable) {
+                Start-Sleep 5;
+                & $Caller @CallerParameters
+            }
+        }
+    }
 }
 
 Invoke-LowerLayer -MainParam $blah -OtherParams $blahblah -ErrorCallback (Get-Item Function:\Handle-Error).ScriptBlock

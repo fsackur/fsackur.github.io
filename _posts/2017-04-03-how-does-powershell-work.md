@@ -66,12 +66,12 @@ Information : {}
 ```
 It makes sense that Commands is empty - we've only just created it. We have the following methods to safely and correctly add commands to our PowerShell:
 
-	* AddArgument
-	* AddCommand
-	* AddParameter
-	* AddParameters
-	* AddScript
-	* AddStatement
+    * AddArgument
+    * AddCommand
+    * AddParameter
+    * AddParameters
+    * AddScript
+    * AddStatement
 
 If you don't want the work of laboriously specifying each detail, use AddScript():
 ```powershell

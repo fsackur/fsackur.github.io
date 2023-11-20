@@ -24,30 +24,30 @@ Both of these are... sub-optimal.
 # Requirement
 Provide a service to allow Powershell scripts to be run on customer servers.
 
-	* low latency
-	* restrict what can be run to only our library of peer-reviewed scripts
-	* run all connections through a choke point for inspection and logging
-	* provide PSObjects back to the user that they can manipulate
-	* enable easy development of script
-	* authenticated using one of our existing identity providers (OAuth, SAML, or one of two in-house apps)
+    * low latency
+    * restrict what can be run to only our library of peer-reviewed scripts
+    * run all connections through a choke point for inspection and logging
+    * provide PSObjects back to the user that they can manipulate
+    * enable easy development of script
+    * authenticated using one of our existing identity providers (OAuth, SAML, or one of two in-house apps)
 
 
 # Lessons from the past
 This ain't our first rodeo. Our current solution is successful enough to generate screams if it breaks. That has almost become a downside, as we are now stuck with it.
 
-	* doesn't return objects to the shell, only as CSV or BBCode
+    * doesn't return objects to the shell, only as CSV or BBCode
 
-	* hard to present output in useful ways
-	* impossible to chain script output
+    * hard to present output in useful ways
+    * impossible to chain script output
 
 
-	* clunky CLI or GUI - makes our techs inefficient
-	* no access at all from the desktop - we can't offer it on our techs' workflow
-	* slow - a 3-second script takes 2 minutes to return
+    * clunky CLI or GUI - makes our techs inefficient
+    * no access at all from the desktop - we can't offer it on our techs' workflow
+    * slow - a 3-second script takes 2 minutes to return
 
 As if that weren't enough, this is what really grinds my gears:
 
-	* _developing scripts for this platform is incredibly time-consuming due to the number of systems that must be manually touched to import new code, test code, submit for peer review, and deploy_
+    * _developing scripts for this platform is incredibly time-consuming due to the number of systems that must be manually touched to import new code, test code, submit for peer review, and deploy_
 
 In sum: it's been an enormous effort to build and maintain our script library, and the tool is not enabling our staff nearly as much as it could do. _We should have bought a solution long ago, but we didn't, and we never will._ Readers, you know how it goes!
 
@@ -79,12 +79,12 @@ We aren't just designing code, we are designing business processes around the li
 
 Based on this, I'm going to draw up further requirements:
 
-	* testing and submitting scripts for peer review must be invoked simply by checking script into our github
-	* this must then invoke the script on servers in our test environment and post the output somewhere that is already in the workflow for the peer reviewer
-	* If this is a bugfix or new feature, output must be diffed against previous output from each server to ensure we aren't making a breaking change (caveat: there can and will be configuration drift on our test account)
-	* If the output looks like it ran without error, send to a peer review queue (we use Jira, so that will be a status change)
-	* If peer review passes, code must be automatically deployed within one hour (hopefully seconds!)
-	* Authorised dev users must be able to run script, against the test environment only, without invoking this process
+    * testing and submitting scripts for peer review must be invoked simply by checking script into our github
+    * this must then invoke the script on servers in our test environment and post the output somewhere that is already in the workflow for the peer reviewer
+    * If this is a bugfix or new feature, output must be diffed against previous output from each server to ensure we aren't making a breaking change (caveat: there can and will be configuration drift on our test account)
+    * If the output looks like it ran without error, send to a peer review queue (we use Jira, so that will be a status change)
+    * If peer review passes, code must be automatically deployed within one hour (hopefully seconds!)
+    * Authorised dev users must be able to run script, against the test environment only, without invoking this process
 
 
 # Architecture

@@ -18,8 +18,8 @@ I also see Web Application Firewalls, such as Imperva, which require ephemeral 
 
 It's a busy life as a sysadmin in 2017, disabling SSL here, Triple-DES there. The way it's often been done is:
 
-	* Edit the registry directly (yawn)
-	* Use [IIS Crypto](https://www.nartac.com/Products/IISCrypto) (Unacceptable! Requires use of mouse!)
+    * Edit the registry directly (yawn)
+    * Use [IIS Crypto](https://www.nartac.com/Products/IISCrypto) (Unacceptable! Requires use of mouse!)
 
 So I'd like to announce [SslRegConfig](https://github.com/fsackur/SslRegConfig), a powershell module to handle all of this for you.
 
@@ -27,9 +27,9 @@ So I'd like to announce [SslRegConfig](https://github.com/fsackur/SslRegConfig),
 # SslRegConfig
 At the heart of this module is functionality to edit the registry. The relevant keys are all within HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL. Functions in this module accept simple protocol names, and do the heavy lifting on your behalf:
 
-	* Back up the registry
-	* Apply correct registry values
-	* Document changes made in output
+    * Back up the registry
+    * Apply correct registry values
+    * Document changes made in output
 
 You do need to reboot to be confident that changes are applied.
 

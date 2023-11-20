@@ -23,19 +23,19 @@ This content was originally presented at a PowerShell User Group UK meetup. If y
 
 # But why?
 
-	* Compiled code will run faster than script
-	* Sometimes, fewer lines of code
-	* Using C# language features such as event-driven programming
-	* Anything with a GUI
-	* Anything of any complexity involving multi-threading
-	* Object inheritance, polymorphism, interfaces
-	* Using design patterns for which Visual Studio templates exist
-	* Using Visual Studio - it's very powerful
-	* More powerful IntelliSense than ISE
-	* Code analysis
-	* Organisation of large projects - if it's over 1000 lines, should it be in a script?
-	* It might fit in better to your organisation's deployment practices
-	* It rocks
+    * Compiled code will run faster than script
+    * Sometimes, fewer lines of code
+    * Using C# language features such as event-driven programming
+    * Anything with a GUI
+    * Anything of any complexity involving multi-threading
+    * Object inheritance, polymorphism, interfaces
+    * Using design patterns for which Visual Studio templates exist
+    * Using Visual Studio - it's very powerful
+    * More powerful IntelliSense than ISE
+    * Code analysis
+    * Organisation of large projects - if it's over 1000 lines, should it be in a script?
+    * It might fit in better to your organisation's deployment practices
+    * It rocks
 
 
 # Choose your weapon
@@ -43,9 +43,9 @@ You can use ~~any IDE you want~~ Visual Studio 2015. At time of writing, the Vis
 
 A word on editions:
 
-	* **Visual Studio Express for Desktop** is _cost-free_, but you cannot install tools from the gallery. That rules out PowerShell Tools, but that's not strictly necessary for this guide. You are not limited in who can consume your code.
-	* **Visual Studio Community** is also cost-free, but you cannot use code that you produce at your company (unless you open-source it first). I'm using Community in this guide; code is [here](https://github.com/fsackur/PSUGUK-Compiled-PSModule)
-	* **Visual Studio Pro**,** Enterprise**,** Ultimate** are all fine if you can pay for them.
+    * **Visual Studio Express for Desktop** is _cost-free_, but you cannot install tools from the gallery. That rules out PowerShell Tools, but that's not strictly necessary for this guide. You are not limited in who can consume your code.
+    * **Visual Studio Community** is also cost-free, but you cannot use code that you produce at your company (unless you open-source it first). I'm using Community in this guide; code is [here](https://github.com/fsackur/PSUGUK-Compiled-PSModule)
+    * **Visual Studio Pro**,** Enterprise**,** Ultimate** are all fine if you can pay for them.
 
 Download from (https://www.visualstudio.com/vs/community/). I recommend also installing [PowerShell Tools](https://marketplace.visualstudio.com/items?itemName=AdamRDriscoll.PowerShellToolsforVisualStudio2015) for the bargain price of $free.
 
@@ -53,16 +53,16 @@ Download from (https://www.visualstudio.com/vs/community/). I recommend also in
 # Setting up Visual Studio
 Devs may spend days at a new job setting up their dev environment. We won't. Here's my cut-down first steps with VS:
 
-	* Tools > Options:
+    * Tools > Options:
 <img class="aligncenter size-full wp-image-851" src="https://freddiesackur.files.wordpress.com/2017/02/capture.png" alt="capture" width="744" height="434" />I am not a fan of my projects going into my user profile. I set paths in Projects and Solutions; C:\dev is nice as far as I'm concerned.
-	* If you installed PowerShell Tools, then you'll want to go into Text Editor > PowerShell and enable line numbers. That will apply if you edit PS script in VS.
+    * If you installed PowerShell Tools, then you'll want to go into Text Editor > PowerShell and enable line numbers. That will apply if you edit PS script in VS.
 <img class=" size-full wp-image-857 aligncenter" src="https://freddiesackur.files.wordpress.com/2017/02/capture1.png" alt="capture" width="744" height="434" />
-	* You have to use at least the Dark theme (Environment > General) if you want to be considered a coder:
+    * You have to use at least the Dark theme (Environment > General) if you want to be considered a coder:
 <img class="alignnone size-full wp-image-868" src="https://freddiesackur.files.wordpress.com/2017/02/capture3.png" alt="capture" width="744" height="434" />
 I also like lyphtec's [Solarized](https://github.com/lyphtec/solarized).
-	* Even though VS Community is free, you do need to sign in to activate it. At the top-right:
+    * Even though VS Community is free, you do need to sign in to activate it. At the top-right:
 <img class="alignnone size-full wp-image-864" src="https://freddiesackur.files.wordpress.com/2017/02/capture2.png" alt="capture" width="649" height="308" />
-	* If you use Github, you can install the extension from Tools > Extensions. Select Online and type in the search bar. You can also install PowerShell Tools here. Unless, of course, you are using VS Express, in which case you can't.
+    * If you use Github, you can install the extension from Tools > Extensions. Select Online and type in the search bar. You can also install PowerShell Tools here. Unless, of course, you are using VS Express, in which case you can't.
 <img class="alignnone size-full wp-image-872" src="https://freddiesackur.files.wordpress.com/2017/02/capture4.png" alt="capture" width="941" height="653" />
 
 That's the VS general setup that you'll need. You can import and export these settings, an exercise which I will leave to you.

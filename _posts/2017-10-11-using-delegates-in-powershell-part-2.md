@@ -139,13 +139,13 @@ We create a function inside the higher-level module that holds all the logic for
 
 function Handle-Error {
     [CmdletBinding()]
-	[OutputType([void])]
-	param(
-		[System.Management.Automation.ErrorRecord]$ErrorRecord,
+    [OutputType([void])]
+    param(
+        [System.Management.Automation.ErrorRecord]$ErrorRecord,
         [ref]$IsRetryable
-	)
+    )
 
-	if ($ErrorRecord.Exception.Message -match '401') {
+    if ($ErrorRecord.Exception.Message -match '401') {
         if ($Script:RetryCount -lt 3) {
             Get-AuthToken
             $Script:RetryCount += 1
