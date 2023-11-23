@@ -118,21 +118,17 @@ $Job = Start-ThreadJob -Name TestJob -ArgumentList $GlobalState -ScriptBlock {
 
 $null = Register-ObjectEvent -InputObject $Job -EventName StateChanged -SourceIdentifier Job.Monitor -Action {
     # JobState: NotStarted = 0, Running = 1, Completed = 2, etc.
-    if ($Event.SourceEventArgs.JobStateInfo.State -eq "Completed")
+    if ($Event.SourceEventArgs.JobStateInfo.State -ge 2)
     {
-        $Result = $Event.Sender | Receive-Job
-        if ($Result)
-        {
-            $Result | Out-String | Write-Host
-        }
+        # propagate warnings and errors
+        $Event.Sender | Receive-Job
 
-        $Event.Sender | Remove-Job
-        Unregister-Event Job.Monitor
-        Get-Job Job.Monitor | Remove-Job
-    }
-    elseif ($Event.SourceEventArgs.JobStateInfo.State -gt 2)
-    {
-        $Event.Sender | Receive-Job | Out-String | Write-Host
+        if ($Event.SourceEventArgs.JobStateInfo.State -eq 2)
+        {
+            $Event.Sender | Remove-Job
+            Unregister-Event Job.Monitor
+            Get-Job Job.Monitor | Remove-Job
+        }
     }
 }
 
