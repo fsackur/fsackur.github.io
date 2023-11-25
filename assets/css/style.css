@@ -32,8 +32,8 @@ table {
 
 /*** Basics ***/
 body {
-  font-family: Verdana, serif;
-  font-size: 13px;
+  font-family: Verdana, system-ui, serif;
+  font-size: 16px;
   line-height: 1.7;
 }
 
@@ -58,11 +58,11 @@ sup { vertical-align: super; font-size: 0.85em; }
 sub { vertical-align: sub; font-size: 0.85em; }
 
 code {
-  font: 1em MartianMono, Consolas, "Liberation Mono", Menlo, Monospace;
+  font: 0.85em MartianMono, Consolas, "Liberation Mono", Menlo, Monospace;
 }
 
 my-custom-class {
-  font: 1em MartianMono, Consolas, "Liberation Mono", Menlo, Monospace;
+  font: 0.85em MartianMono, Consolas, "Liberation Mono", Menlo, Monospace;
   background-color: #839496
 }
 
@@ -106,15 +106,15 @@ acronym, abbr {
 
 
 h1 {
-  font-size: 19px;
+  font-size: 28px;
   margin: 0 0 10px 0;
 }
 h2 {
-  font-size: 15px;
+  font-size: 22px;
   margin: 0 0 10px 0;
 }
 h3 {
-  font-size: 14px;
+  font-size: 18px;
   margin: 0 0 10px 0;
 }
 
@@ -196,7 +196,7 @@ article {
 }
 
 article h1 {
-  font-size: 17px;
+  /* font-size: 17px; */
   margin: 0 0 10px 0;
 }
 article h1 a {
