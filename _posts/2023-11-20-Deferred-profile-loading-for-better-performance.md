@@ -6,6 +6,8 @@ author: freddiesackur
 comments: true
 tags: [Powershell, Async, Profile]
 ---
+_Updated 2023-11-25: the initial code sample broke argument completers. The sample at the bottom is amended. It needed reflection code... \<sigh>_
+
 I have pared down my Powershell profile to improve performance, but it does still take the best part of a second to load on my desktop machine.
 
 As a powershell-everywhere person, my profile can be unacceptably slow on less-powerful machines. But I don't want to lose any functionality.
@@ -83,20 +85,25 @@ Measure-Command {. $PROFILE.CurrentUserAllHosts}
 exit
 ```
 
+## Full sample of a minimal solution
+
+> This breaks with VS Code shell integration. To disable it, set "terminal.integrated.shellIntegration.enabled" to "false" in your settings.
+
 The full profile script:
 
 ```powershell
-$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = [Text.Encoding]::UTF8
-
 <#
-    code to cd to my preferred PWD
+    ...cd to my preferred PWD
+    ...set up my prompt
+    ...run code that doesn't work in the deferred scriptblock
+          (i.e. setting [console]::OutputEncoding)
 #>
 
-# Set up my prompt
-if (Get-Command starship -ErrorAction SilentlyContinue)
-{
-    $env:STARSHIP_CONFIG = $PSScriptRoot | Split-Path | Join-Path -ChildPath starship.toml
-    starship init powershell --print-full-init | Out-String | Invoke-Expression
+
+$Deferred = {
+    . "/home/freddie/.local/share/chezmoi/PSHelpers/Console.ps1"
+    . "/home/freddie/.local/share/chezmoi/PSHelpers/git_helpers.ps1"
+    # ...other slow code...
 }
 
 
@@ -104,34 +111,66 @@ if (Get-Command starship -ErrorAction SilentlyContinue)
 $GlobalState = [psmoduleinfo]::new($false)
 $GlobalState.SessionState = $ExecutionContext.SessionState
 
-$Job = Start-ThreadJob -Name TestJob -ArgumentList $GlobalState -ScriptBlock {
-    $GlobalState = $args[0]
-    . $GlobalState {
-        # We always need to wait so that Get-Command itself is available
-        do {Start-Sleep -Milliseconds 200} until (Get-Command Import-Module -ErrorAction Ignore)
+# to run our code asynchronously
+$Runspace = [runspacefactory]::CreateRunspace($Host)
+$Powershell = [powershell]::Create($Runspace)
+$Runspace.Open()
+$Runspace.SessionStateProxy.PSVariable.Set('GlobalState', $GlobalState)
 
-        . "$HOME/.local/share/chezmoi/Console.ps1"
-        . "$HOME/.local/share/chezmoi/git_helpers.ps1"
-        # other dot-sourced scripts...
-    }
+# ArgumentCompleters are set on the ExecutionContext, not the SessionState
+# Note that $ExecutionContext is not an ExecutionContext, it's an EngineIntrinsics 😡
+$Private = [Reflection.BindingFlags]'Instance, NonPublic'
+$ContextField = [Management.Automation.EngineIntrinsics].GetField('_context', $Private)
+$Context = $ContextField.GetValue($ExecutionContext)
+
+# Get the ArgumentCompleters. If null, initialise them.
+$ContextCACProperty = $Context.GetType().GetProperty('CustomArgumentCompleters', $Private)
+$ContextNACProperty = $Context.GetType().GetProperty('NativeArgumentCompleters', $Private)
+$CAC = $ContextCACProperty.GetValue($Context)
+$NAC = $ContextNACProperty.GetValue($Context)
+if ($null -eq $CAC)
+{
+    $CAC = [Collections.Generic.Dictionary[string, scriptblock]]::new()
+    $ContextCACProperty.SetValue($Context, $CAC)
+}
+if ($null -eq $NAC)
+{
+    $NAC = [Collections.Generic.Dictionary[string, scriptblock]]::new()
+    $ContextNACProperty.SetValue($Context, $NAC)
 }
 
-$null = Register-ObjectEvent -InputObject $Job -EventName StateChanged -SourceIdentifier Job.Monitor -Action {
-    # JobState: NotStarted = 0, Running = 1, Completed = 2, etc.
-    if ($Event.SourceEventArgs.JobStateInfo.State -ge 2)
-    {
-        # propagate warnings and errors
-        $Event.Sender | Receive-Job
+# Get the AutomationEngine and ExecutionContext of the runspace
+$RSEngineField = $Runspace.GetType().GetField('_engine', $Private)
+$RSEngine = $RSEngineField.GetValue($Runspace)
+$EngineContextField = $RSEngine.GetType().GetFields($Private) | Where-Object {$_.FieldType.Name -eq 'ExecutionContext'}
+$RSContext = $EngineContextField.GetValue($RSEngine)
 
-        if ($Event.SourceEventArgs.JobStateInfo.State -eq 2)
-        {
-            $Event.Sender | Remove-Job
-            Unregister-Event Job.Monitor
-            Get-Job Job.Monitor | Remove-Job
-        }
-    }
+# Set the runspace to use the global ArgumentCompleters
+$ContextCACProperty.SetValue($RSContext, $CAC)
+$ContextNACProperty.SetValue($RSContext, $NAC)
+
+$Wrapper = {
+    # Without a sleep, you get issues:
+    #   - occasional crashes
+    #   - prompt not rendered
+    #   - no highlighting
+    # Assumption: this is related to PSReadLine.
+    # 20ms seems to be enough on my machine, but let's be generous - this is non-blocking
+    Start-Sleep -Milliseconds 200
+
+    . $GlobalState {. $Deferred; Remove-Variable Deferred}
 }
 
-Remove-Variable GlobalState
-Remove-Variable Job
+$null = $Powershell.AddScript($Wrapper.ToString()).BeginInvoke()
 ```
+
+## Timings
+
+Note that it takes a few millisconds to parse and start executing the profile. I need more than 74ms to get to a blinking cursor.
+
+| Time (s) | Waypoint |
+| -------- | -------- |
+| 00.000 | Just before invoking the asynchronous code |
+| 00.074 | At the bottom of the profile; shell is interactive |
+| 00.275 | Starting the deferred code, after the 200ms sleep (is it a PSReadline issue?) |
+| 00.802 | Completed the deferred code; all functions and modules available |
