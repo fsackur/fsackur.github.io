@@ -1,3 +1,4 @@
 _site
 .vscode
 gem
+Gemfile.lock

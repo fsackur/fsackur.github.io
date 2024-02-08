@@ -9,4 +9,5 @@ markdown: kramdown
 highlighter: rouge
 
 gems: [jekyll-paginate]
-exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
+plugins: [jekyll-paginate]
+exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile', 'gem']
