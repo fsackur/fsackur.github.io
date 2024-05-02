@@ -15,6 +15,9 @@ title: FSackur
 		{% else %}
 			<h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
 		{% endif %}
+    {% if post.subtitle %}
+      <h2 class="subtitle">{{ post.subtitle }}</h2>
+  {% endif %}
 
 		<div class="post-content">{{ post.content }}</div>
 

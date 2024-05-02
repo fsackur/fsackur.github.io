@@ -27,7 +27,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
+.subtitle {
+  font-style: italic;
+  margin-top: -0.85em;
+  margin-left: 4em;
+}
 
 
 /*** Basics ***/
