@@ -41,20 +41,20 @@ Write a blogpost in .md, save it in the _posts folder, commit to master, and pus
 
 Your .md blogpost file must meet some syntax requirements for Jekyll to process it into html.
 
-1. File name: this must exactly match the format laid out in your theme. I'm not sure if this is customisable, but my site requires my filenames to be in the _posts directory and look like yyyy-mm-dd-all-lowercase-title-with-dashes.md
+1. File name: this must exactly match the format laid out in your theme. I'm not sure if this is customisable, but my site requires my filenames to be in the `_posts` directory and look like `yyyy-mm-dd-all-lowercase-title-with-dashes.md`
 
 2. Post header: header text must match the sample posts that your theme probably included. Mine looks like this:
 
-```
----
-layout: post
-title: Migrating the blog to Github Pages
-date: 2017-10-11 01:04
-author: freddiesackur
-comments: true
-tags: [Jekyll, Ruby, meta]
----
-```
+    ```
+    ---
+    layout: post
+    title: Migrating the blog to Github Pages
+    date: 2017-10-11 01:04
+    author: freddiesackur
+    comments: true
+    tags: [Jekyll, Ruby, meta]
+    ---
+    ```
 
 ### Build errors?
 
